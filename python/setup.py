@@ -9,20 +9,19 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "an_example_pypi_project",
-    version = "0.0.4",
-    author = "Andrew Carter",
-    author_email = "andrewjcarter@gmail.com",
-    description = ("An demonstration of how to create, document, and publish "
-                                   "to the cheese shop a5 pypi.org."),
-    license = "BSD",
-    keywords = "example documentation tutorial",
-    url = "http://packages.python.org/an_example_pypi_project",
-    packages=['an_example_pypi_project', 'tests'],
+    name = "evdev_redirector",
+    version = "0.0.1",
+    author = "Miroslav Tzonkov",
+    author_email = "atvservice@mail.bg",
+    description = ("Get touchpad events and transforms them to uinput events "),
+    license = "GPL",
+    keywords = "evedev zoom event touchpad touchpoint",
+    url = "http://smooker.org/touchpad_redirector",
+    packages=['evedev_redirector', 'tests'],
     long_description=read('README'),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: GPL License",
     ],
 )
