@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from evdev import UInput, InputDevice, categorize, ecodes as e
+from evdev import UInput, InputDevice, categorize, list_devices, ecodes as e
 from select import select
 #import gtk
 #import wnck
@@ -7,6 +7,7 @@ from select import select
 #import threading
 import re
 from subprocess import Popen, PIPE, STDOUT
+import evdev
 
 def get_active_window_title():
     root = Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=PIPE)
@@ -53,7 +54,15 @@ def sendZoomOut( ui ):
 
 
 #todo: get the device based on regex r.g. touchpad.
-dev = InputDevice('/dev/input/event7')
+
+devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
+for device in devices:
+    print(device.fn, device.name, device.phys)
+    if "TouchPad" in device.name:
+        print "----------"
+        break
+
+dev = InputDevice(device.fn)
 
 ui = UInput()
 
