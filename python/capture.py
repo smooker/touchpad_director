@@ -8,6 +8,7 @@ from select import select
 import re
 from subprocess import Popen, PIPE, STDOUT
 import evdev
+import sys
 
 def get_active_window_title():
     root = Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=PIPE)
@@ -59,8 +60,16 @@ devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
 for device in devices:
     print(device.fn, device.name, device.phys)
     if "TouchPad" in device.name:
-        print "----------"
         break
+try:
+    device
+except NameError:
+    print "TOUCHPAD NOT FOUND!"
+    print devices
+    sys.exit()
+else:
+    print "FOUND:"+device.name
+
 
 dev = InputDevice(device.fn)
 
