@@ -64,11 +64,11 @@ for device in devices:
 try:
     device
 except NameError:
-    print "TOUCHPAD NOT FOUND!"
-    print devices
+    print("TOUCHPAD NOT FOUND!")
+    print(devices)
     sys.exit()
 else:
-    print "FOUND:"+device.name
+    print("FOUND:"+device.name)
 
 
 dev = InputDevice(device.fn)
@@ -84,26 +84,26 @@ while True:
     #print "wnd:"+wndTitle
     r,w,x = select([dev], [], [])
     for event in dev.read():
-	if ( "FreeCAD" in wndTitle ):
+        if ("FreeCAD" in wndTitle):
             #print "Vleznahme"
-	    if (event.code == e.ABS_X and event.type == 3):         #we are in X range/area. todo: get MAX_ABS_X and Y (about 1200 and 6000 on mine)
-		if ( event.value <= 1600 or event.value >= 6000):
-		    x1 = event.value
+            if (event.code == e.ABS_X and event.type == 3):         #we are in X range/area. todo: get MAX_ABS_X and Y (about 1200 and 6000 on mine)
+                if ( event.value <= 1600 or event.value >= 6000):
+                    x1 = event.value
 		    #print("Got X axis lockup:"+str(event.value))
-		else:
-		    x1 = -1;
-	    if (event.code == e.ABS_Y and event.type == 3 and x1 > 0):
-		if ( event.value > 500 and event.value <= 6000):     #we are in Y range/area. todo: get MAX_ABS_X and Y (about 5000 and 800 on mine)
+                else:
+                    x1 = -1;
+            if (event.code == e.ABS_Y and event.type == 3 and x1 > 0):
+                if ( event.value > 500 and event.value <= 6000):     #we are in Y range/area. todo: get MAX_ABS_X and Y (about 5000 and 800 on mine)
 		    #print("Got Y axis lockup:"+str(event.value))
-		    if (event.value < (5000-800)/2):
+                    if (event.value < (5000-800)/2):
 			#print("Got zoomin")
-			sendZoomIn(ui)
-			y1 = event.value
-		    else:
+                        sendZoomIn(ui)
+                        y1 = event.value
+                    else:
 			#print("Got zoomout")
-			y1 = event.value
-			sendZoomOut(ui)
+                        y1 = event.value
+                        sendZoomOut(ui)
 		    
-		else:
-		    y1 = -1
+                else:
+                    y1 = -1
 
