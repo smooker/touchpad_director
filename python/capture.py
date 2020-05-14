@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3
 from evdev import UInput, InputDevice, categorize, list_devices, ecodes as e
 from select import select
 #import gtk
